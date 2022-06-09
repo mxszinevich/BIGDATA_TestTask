@@ -17,6 +17,8 @@ black = "^22.3.0"
 factory-boy = "^3.2.1"
 celery = "^5.2.7"
 
+[tool.black]
+exclude = "migrations"
 [tool.poetry.dev-dependencies]
 
 [build-system]
