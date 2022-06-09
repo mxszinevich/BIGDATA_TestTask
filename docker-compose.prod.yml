@@ -1,0 +1,51 @@
+version: "3.3"
+
+services:
+
+  otn:
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    command: >
+      sh -c "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - ./:/backend/
+      - static_volume:/static
+      - media_volume:/media
+    expose:
+      - 8000
+    env_file:
+      - .env.prod
+    depends_on:
+      - postgres
+
+  redis:
+    image: redis:7.0.0-alpine
+    ports:
+    - 6378:6379
+    volumes:
+      - ./redisdata:/otn/redisdata
+
+  postgres:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    env_file:
+      - .env.prod
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    volumes:
+      - static_volume:/backend/static
+      - media_volume:/backend/media
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  media_volume:
+  static_volume:
