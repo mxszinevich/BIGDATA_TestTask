@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer, CharField
 
 from tasks.models import Task
 from tasks.serializers import TaskFileSerializer
+from tasks.validators import validate_completion_date
 
 
 class TaskUpdateSerializer(ModelSerializer):
@@ -11,7 +12,7 @@ class TaskUpdateSerializer(ModelSerializer):
 
     title = CharField(required=False)
     description = CharField(required=False)
-    completion_date = CharField(required=False)
+    completion_date = CharField(required=False, validators=[validate_completion_date])
     files = TaskFileSerializer(many=True, required=False)
 
     class Meta:

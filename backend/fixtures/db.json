@@ -1,0 +1,40 @@
+[
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$BVQef5PEf1oXa5KQBDmnAH$DWQTSpCVKrSngsGyOEwftTCJZ+HgwvIdpOykKt4htmU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "test_user",
+    "first_name": "first_name",
+    "last_name": "last_name",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-06-11T17:19:39.419Z",
+    "patronymic": "patronymic",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "title": "Задача",
+    "description": "Описание",
+    "completion_date": "2022-09-09",
+    "active": false
+  }
+},
+{
+  "model": "tasks.taskfile",
+  "pk": 1,
+  "fields": {
+    "task": 1,
+    "file": "evropejskaya-koshka-dikij-kot-morda-vzglyad.jpg"
+  }
+}
+]

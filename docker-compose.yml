@@ -7,7 +7,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py migrate && python manage.py loaddata fixtures/db.json && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend:/backend
       - static_volume:/static
@@ -22,10 +22,12 @@ services:
 
   redis:
     image: redis:7.0.0-alpine
+    expose:
+      - 6379
     ports:
     - 6379:6379
     volumes:
-      - ./redisdata:/backend/redisdata
+      - ./backend:/backend/redisdata
 
   postgres:
     image: postgres:13.0-alpine
@@ -51,9 +53,9 @@ services:
     build:
       context: ./backend/
       dockerfile: Dockerfile
-    command: celery -A config worker --loglevel=info -Q base
+    command: celery -A config worker -B --loglevel=info -Q base
     volumes:
-      - .:/backend/celery
+      - ./backend/redisdata:/backend/celery
     env_file:
       - .env
     depends_on:
