@@ -39,7 +39,11 @@ class TaskViewSet(ModelViewSet):
         return serializer_class
 
     def get_queryset(self):
-        queryset = Task.objects.filter(user=self.request.user).prefetch_related("files")
+        queryset = (
+            Task.objects.filter(user=self.request.user)
+            .select_related("user")
+            .prefetch_related("files")
+        )
         return queryset
 
     @extend_schema(
