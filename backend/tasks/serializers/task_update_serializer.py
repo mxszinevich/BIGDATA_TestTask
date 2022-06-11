@@ -6,7 +6,7 @@ from tasks.serializers import TaskFileSerializer
 
 class TaskUpdateSerializer(ModelSerializer):
     """
-    Сериализатор обовления задачи
+    Сериализатор обновления задачи
     """
 
     title = CharField(required=False)

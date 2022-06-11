@@ -3,7 +3,7 @@ from rest_framework.permissions import BasePermission
 
 class TaskPermission(BasePermission):
     """
-    Разграничение прав задач
+    Разграничение прав API задач
     """
 
     def has_permission(self, request, view) -> bool:

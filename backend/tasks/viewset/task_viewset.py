@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.decorators import parser_classes
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -24,6 +25,7 @@ class TaskViewSet(ModelViewSet):
     """
 
     permission_classes = [TaskPermission]
+    pagination_class = LimitOffsetPagination
 
     def get_serializer_class(self):
         serializer_class = TaskListSerializer
@@ -78,7 +80,7 @@ class TaskViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         task_serializer = self.get_serializer(data=request.data)
         task_serializer.is_valid(raise_exception=True)
-        task = task_serializer.save(user=request.user)
+        task: Task = task_serializer.save(user=request.user)
 
         for file in request.data.getlist("files"):
             files_serializer = TaskFileSerializer(data={"file": file})
