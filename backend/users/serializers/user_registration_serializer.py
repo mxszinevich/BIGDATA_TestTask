@@ -1,4 +1,4 @@
-from rest_framework.serializers import CharField, IntegerField
+from rest_framework.serializers import CharField
 from djoser.serializers import UserCreateSerializer
 
 
