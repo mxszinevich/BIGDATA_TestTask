@@ -82,6 +82,10 @@ class TaskViewSet(ModelViewSet):
     )
     @parser_classes([MultiPartParser])
     def create(self, request, *args, **kwargs):
+        """
+        Создание задачи с учетом передачи нескольких файлов
+        """
+
         task_serializer = self.get_serializer(data=request.data)
         task_serializer.is_valid(raise_exception=True)
         task: Task = task_serializer.save(user=request.user)

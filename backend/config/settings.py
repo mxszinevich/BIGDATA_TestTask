@@ -48,6 +48,11 @@ DJOSER = {
     },
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "BIGDATA",
+    "DESCRIPTION": "API тестового задания в компанию BIGDATA",
+}
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
