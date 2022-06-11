@@ -7,6 +7,8 @@
 username: test_user   
 password: Test#Pass
 
+[Для тестирования можно воспользоваться postman коллекцией](https://github.com/mxszinevich/BIGDATA_TestTask/tree/master/postman)
+
 ---
 
 Локальная установка:
